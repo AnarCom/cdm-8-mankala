@@ -1,51 +1,48 @@
-
-	
-	
 asect	0x00
 	# WRITE YOUR CODE HERE
-	addsp 0xF0
-	ldi r1, 13
-	ldi r2, 0
-	ldi r3, 4
-	while
-	tst r1
-	stays pl
-		st r2, r3
-		inc r2
-		dec r1
-	wend
+#	addsp 0xF0
+#	ldi r1, 13
+#	ldi r2, 0
+#	ldi r3, 4
+#	while
+#	tst r1
+#	stays pl
+#		st r2, r3
+#		inc r2
+#		dec r1
+#	wend
 	
-	ldi r0, 0
-	ldi r1, 6
-	st r1, r0
+#	ldi r0, 0
+#	ldi r1, 6
+#	st r1, r0
 	
-	ldi r1, 13
-	st r1, r0
+#	ldi r1, 13
+#	st r1, r0
 	
-	ldi r0, 1
-	ldi r1, 0x10
-	ldi r2, 6
+#	ldi r0, 1
+#	ldi r1, 0x10
+#	ldi r2, 6
 	
-	while 
-	tst r2
-	stays pl
-	st r1, r0
-	dec r2
-	inc r0
-	inc r1
+#	while 
+#	tst r2
+#	stays pl
+#	st r1, r0
+#	dec r2
+#	inc r0
+#	inc r1
 	
-	wend 
-	inc r0
-	ldi r2, 6
-	while 
-	tst r2
-	stays pl
-	st r1, r0
-	dec r2
-	inc r0
-	inc r1
+#	wend 
+#	inc r0
+#	ldi r2, 6
+#	while 
+#	tst r2
+#	stays pl
+#	st r1, r0
+#	dec r2
+#	inc r0
+#	inc r1
 	
-	wend
+#	wend
 	
 	
 	
@@ -66,8 +63,15 @@ asect	0x00
 		
 		ld r1, r1
 		ld r2, r2
+		
+		ldi r3, 0xFE
+		st r3, r1
 		#r2 - adress + flug
 		or r0, r2
+		ldi r3, 0xFC
+		st r3, r2
+		ldi r2, 0
+		st r3, r2
 		#FE - data to write
 		
 		pop r2
