@@ -116,7 +116,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(670,570)" to="(670,580)"/>
     <wire from="(340,360)" to="(390,360)"/>
     <wire from="(530,380)" to="(590,380)"/>
-    <wire from="(570,300)" to="(570,390)"/>
     <wire from="(340,250)" to="(380,250)"/>
     <wire from="(590,410)" to="(590,430)"/>
     <wire from="(340,370)" to="(380,370)"/>
@@ -133,6 +132,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(710,560)" to="(710,570)"/>
     <wire from="(730,560)" to="(730,570)"/>
     <wire from="(750,560)" to="(750,570)"/>
+    <wire from="(560,410)" to="(560,420)"/>
     <wire from="(630,520)" to="(630,660)"/>
     <wire from="(390,180)" to="(440,180)"/>
     <wire from="(390,200)" to="(440,200)"/>
@@ -144,10 +144,9 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(520,420)" to="(560,420)"/>
     <wire from="(390,360)" to="(390,380)"/>
     <wire from="(670,570)" to="(710,570)"/>
-    <wire from="(460,300)" to="(570,300)"/>
-    <wire from="(560,390)" to="(560,420)"/>
     <wire from="(590,380)" to="(590,410)"/>
     <wire from="(130,420)" to="(130,450)"/>
+    <wire from="(560,390)" to="(560,410)"/>
     <wire from="(110,380)" to="(110,410)"/>
     <wire from="(710,700)" to="(710,720)"/>
     <wire from="(770,560)" to="(770,580)"/>
@@ -163,48 +162,42 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(380,430)" to="(510,430)"/>
     <wire from="(380,370)" to="(380,430)"/>
     <wire from="(770,580)" to="(780,580)"/>
-    <wire from="(560,390)" to="(570,390)"/>
-    <comp lib="1" loc="(520,390)" name="NOT Gate">
-      <a name="facing" val="west"/>
-      <a name="size" val="20"/>
-    </comp>
-    <comp lib="0" loc="(730,570)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="cl"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
     <comp lib="1" loc="(530,380)" name="Controlled Buffer">
       <a name="width" val="8"/>
     </comp>
+    <comp lib="4" loc="(800,520)" name="RAM"/>
+    <comp lib="2" loc="(380,210)" name="Decoder">
+      <a name="disabled" val="0"/>
+    </comp>
     <comp lib="0" loc="(440,200)" name="Tunnel">
       <a name="label" val="data"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="0" loc="(430,330)" name="Tunnel">
-      <a name="width" val="8"/>
-      <a name="label" val="addr"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="2" loc="(380,210)" name="Decoder"/>
-    <comp lib="0" loc="(750,570)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="r\w"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="0" loc="(780,580)" name="Tunnel">
-      <a name="label" val="reset"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="0" loc="(430,270)" name="Tunnel">
-      <a name="label" val="mem"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
     <comp lib="0" loc="(470,290)" name="Tunnel">
       <a name="label" val="r\w"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
+    <comp lib="0" loc="(730,570)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="cl"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="0" loc="(540,520)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="width" val="8"/>
+      <a name="label" val="addr"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="0" loc="(430,270)" name="Tunnel">
+      <a name="label" val="mem"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
     <comp lib="0" loc="(130,420)" name="Tunnel">
       <a name="label" val="reset"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="0" loc="(440,180)" name="Tunnel">
+      <a name="label" val="code"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
     <comp lib="4" loc="(800,660)" name="ROM">
@@ -219,6 +212,22 @@ a e4 29 a4 8a 8c 8d ee
 d1 ff d0 1 a4 ee 0 d4
 </a>
     </comp>
+    <comp lib="0" loc="(30,410)" name="Clock"/>
+    <comp lib="7" loc="(340,360)" name="CdM-8"/>
+    <comp lib="0" loc="(560,410)" name="Tunnel">
+      <a name="label" val="r\w"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="1" loc="(510,430)" name="Controlled Buffer">
+      <a name="facing" val="west"/>
+      <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(620,410)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="width" val="8"/>
+      <a name="label" val="IO"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
     <comp lib="0" loc="(710,720)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="code"/>
@@ -229,31 +238,26 @@ d1 ff d0 1 a4 ee 0 d4
       <a name="label" val="data"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
-    <comp lib="0" loc="(620,410)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="width" val="8"/>
-      <a name="label" val="IO"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="0" loc="(440,180)" name="Tunnel">
-      <a name="label" val="code"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
-    <comp lib="0" loc="(30,410)" name="Clock"/>
-    <comp lib="1" loc="(510,430)" name="Controlled Buffer">
+    <comp lib="1" loc="(520,390)" name="NOT Gate">
       <a name="facing" val="west"/>
-      <a name="width" val="8"/>
+      <a name="size" val="20"/>
     </comp>
-    <comp lib="5" loc="(120,450)" name="Button"/>
-    <comp lib="7" loc="(340,360)" name="CdM-8"/>
     <comp lib="0" loc="(60,410)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="cl"/>
       <a name="labelfont" val="SansSerif plain 9"/>
     </comp>
-    <comp lib="4" loc="(800,520)" name="RAM"/>
-    <comp lib="0" loc="(540,520)" name="Tunnel">
-      <a name="facing" val="east"/>
+    <comp lib="5" loc="(120,450)" name="Button"/>
+    <comp lib="0" loc="(750,570)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="r\w"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="0" loc="(780,580)" name="Tunnel">
+      <a name="label" val="reset"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="0" loc="(430,330)" name="Tunnel">
       <a name="width" val="8"/>
       <a name="label" val="addr"/>
       <a name="labelfont" val="SansSerif plain 9"/>
