@@ -1,6 +1,6 @@
 asect	0x00
 	# WRITE YOUR CODE HERE
-#	addsp 0xF0
+	addsp 0xF0
 #	ldi r1, 13
 #	ldi r2, 0
 #	ldi r3, 4
