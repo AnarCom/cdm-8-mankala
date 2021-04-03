@@ -37,6 +37,21 @@ asect	0x00
 	if
 	tst r0
 	is z
+	#0b00000000
+      #^^^^^^^^
+      #||||||||
+      #|||||||> Error
+      #||||||> W\R to\from field
+      #|||||> Computing
+      #||||> Waiting user action
+      #|||> Game stopped
+      #||> Initializing memory
+      #|> Set button register to 0
+      #> Ready
+
+		ldi r0, 0x0f
+		ldi r1, 0b00100000
+		st r0, r1  
 		addsp 0xF0
 		ldi r1, 13
 		ldi r2, 0
