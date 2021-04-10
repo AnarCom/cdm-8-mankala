@@ -99,6 +99,26 @@ asect	0x00
 		ldi r1, 0b00000000
 		st r0, r1
 	rts
+	
+	
+	CIRCLE_NUMBERS:
+		ldi r0, 0x1F
+		ld r0, r1
+		while
+		tst r1
+		stays z
+		ld r0, r1
+		wend
+		ldi r0, 0x11
+		ld r0, r2
+		while
+		sub r1, r2
+		stays nz 
+		inc r0
+		ld r0, r2
+		wend
+		
+	rts
 	#BEGIN MAIN
 	MAIN:
 	#write_to_field 0x00, 0x00
@@ -110,10 +130,11 @@ asect	0x00
 	is z
 	addsp 0xF0
 	jsr INIT_MEMORY
+	#jsr WRITE_TO_FIELD
 	fi
+	jsr CIRCLE_NUMBERS
+
 	
-	
-	jsr WRITE_TO_FIELD
 	halt
 	#switch to 2 bank
 asect 0xF7

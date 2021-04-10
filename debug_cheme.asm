@@ -1,9 +1,9 @@
 asect 0x00
-jsr A
-halt
-A:
-ldi r0, 0xff
-ldi r1, 1
-st r0, r1
-rts
+ldi r0, 0xf9
+while
+tst r1
+stays z
+ld r0, r1
+wend
+halt 
 end
