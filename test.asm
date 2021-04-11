@@ -104,11 +104,13 @@ asect	0x00
 	CIRCLE_NUMBERS:
 		ldi r0, 0x1F
 		ld r0, r1
+		#Ожидание числа на входе (по логике можно выпилить)
 		while
 		tst r1
 		stays z
 		ld r0, r1
 		wend
+		#Поиск id ячейки
 		ldi r0, 0x11
 		ld r0, r2
 		while
@@ -117,11 +119,34 @@ asect	0x00
 		inc r0
 		ld r0, r2
 		wend
-		
+		# переход к адресу значения
+		ldi r3, 0x10
+		sub r0, r3
+		move r3, r0
+		ld r0, r1
+		# зануление ячейки
+		ldi r2, 0
+		st r0, r2
+		#обработка перекладывания
+		while 
+		tst r1
+		stays nz
+		inc r0
+		ld r0, r2
+		inc r2
+		st r0, r2
+		dec r1
+		wend
+		# тут ДоЛжНа быть обработка того, что мы переложили в 0 и в финальную ячейку
+		ldi r0, 0x1F
+		ldi r1, 0
+		st r0, r1
+		halt
 	rts
 	#BEGIN MAIN
 	MAIN:
-	#write_to_field 0x00, 0x00
+	#забиваем на адрес возврата, чтобы не нагадить в кучу
+	pop r0
 	#check that initializing is needed
 	ldi r0, 0x0E
 	ld r0, r0
@@ -130,16 +155,28 @@ asect	0x00
 	is z
 	addsp 0xF0
 	jsr INIT_MEMORY
-	#jsr WRITE_TO_FIELD
-	fi
+	jsr WRITE_TO_FIELD
+	else
 	jsr CIRCLE_NUMBERS
-
-	
-	halt
+	fi
+	  
+	ldi r0, 0x1E
+	ld r0, r1
+	if
+	tst r1
+	is z
+	ldi r1, 1
+	else
+	ldi r1, 0
+	fi
+	st r0, r1
+	inc r1
+	move r1, r0
+	br 0xF7
+	#перед попаданием в функцию в r0 должен быть адрес банки для перехода
 	#switch to 2 bank
 asect 0xF7
-	ldi r1, 0xff
-	ldi r0, 2	
+	ldi r1, 0xff	
 	st r1, r0
 	br 0
 	
