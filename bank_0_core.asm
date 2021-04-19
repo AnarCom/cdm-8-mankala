@@ -176,7 +176,6 @@ asect	0x00
 asect 0xF7
 	ldi r1, 0xff	
 	st r1, r0
-	halt
 	br 0
 	
 halt

@@ -1,6 +1,6 @@
 asect	0x00
 	# WRITE YOUR CODE HERE
-	ldi r0, 0xFB
+	ldi r0, 0xF9
 	ld r0, r1
 	while 
 	tst r1
