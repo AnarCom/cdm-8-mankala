@@ -46,45 +46,53 @@ br MAIN
 	rts
 	
 	CIRCLE_NUMBERS:
-	ldi r0, 0x1F
-	ld r0, r1
-	#Ожидание числа на входе (по логике можно выпилить)
-	while
+		ldi r0, 0x1F
+ 		ld r0, r1
+		#Ожидание числа на входе (по логике можно выпилить)
+		while
 		tst r1
-	stays z
+		stays z
 		ld r0, r1
-	wend
-	#Поиск id ячейки
-	ldi r0, 0x11
-	ld r0, r2
-	while
+		wend
+		#Поиск id ячейки
+		ldi r0, 0x10
+		ld r0, r2
+		while
 		sub r1, r2
-	stays nz 
+		stays nz 
 		inc r0
 		ld r0, r2
-	wend
-	# переход к адресу значения
-	ldi r3, 0x10
-	sub r0, r3
-	move r3, r0
-	ld r0, r1
-	# зануление ячейки
-	ldi r2, 0
-	st r0, r2
-	#обработка перекладывания
-	while 
+		wend
+		# переход к адресу значения
+		ldi r3, 0x10
+		sub r0, r3
+		move r3, r0
+		ld r0, r1
+		# зануление ячейки
+		ldi r2, 0
+		st r0, r2
+		#обработка перекладывания
+		while 
 		tst r1
-	stays nz
+		stays nz
+		ldi r3, 0x0E 
 		inc r0
+		
+		if
+			sub r0, r3
+		is z
+		ldi r0, 0
+		fi
+		
 		ld r0, r2
 		inc r2
 		st r0, r2
 		dec r1
-	wend
-	# тут ДоЛжНа быть обработка того, что мы переложили в 0 и в финальную ячейку
-	ldi r0, 0x1F
-	ldi r1, 0
-	st r0, r1
+		wend
+		# тут ДоЛжНа быть обработка того, что мы переложили в 0 и в финальную ячейку
+		ldi r0, 0x1F
+		ldi r1, 0
+		st r0, r1
 	rts
 	
 	
