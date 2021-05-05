@@ -45,7 +45,24 @@ br MAIN
 	st r0, r1
 	rts
 	
-	CIRCLE_NUMBERS:
+	# loads hole to skip to r3
+LOAD_SKIPPING_HOLE:
+	# 2 - AI
+	# 3 - People
+	ldi r3, 0x1E
+	ld r3, r3
+	dec r3
+	dec r3
+	
+	if
+		tst r3
+	is z
+		ldi r3, 0x06
+	else
+		ldi r3, 0x0D
+	fi
+	rts
+CIRCLE_NUMBERS:
 		ldi r0, 0x1F
  		ld r0, r1
 		#Ожидание числа на входе (по логике можно выпилить)
@@ -75,12 +92,22 @@ br MAIN
 		while 
 		tst r1
 		stays nz
-		ldi r3, 0x0E 
+		 
 		inc r0
 		
-		if
+		jsr LOAD_SKIPPING_HOLE
+		#пропуск лунки противника
+		if 
 			sub r0, r3
 		is z
+			inc r0
+		fi
+		
+		#циклическое замыкание лунок (если add лунки > max -> = min)
+		ldi r3, 0x0E
+		if
+			sub r0, r3
+		is pl
 		ldi r0, 0
 		fi
 		
