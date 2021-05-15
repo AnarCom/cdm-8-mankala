@@ -133,7 +133,52 @@ CIRCLE_NUMBERS:
 			sub r0, r1
 		is z
 		jsr CHANGE_QUEUE_OF_PLAYER
+		else
+			move r0, r1
+			ld r1, r1
+			ldi r2, 1
+			if
+			sub r1, r2
+			is z
+				ldi r1, 0x1E
+				ld r1, r1
+				ldi r2, 2
+				if
+					sub r1, r2
+				is z
+					ldi r2, -8
+				else
+					ldi r2, 8
+				fi
+				
+				move r0, r1
+				add r2, r1
+				ldi r3, 0
+				st r0, r3
+				ld r1, r2
+				inc r2
+				st r1, r3
+				
+				ldi r1, 0x1E
+				ld r1, r1
+				ldi r0, 2
+				if
+					sub r0, r1
+				is z 
+					ldi r1, 0x0D
+				else
+					ldi r1, 0x06
+				fi
+				# r2 - количество шариков, которые нужно переложить 
+				ld r1, r0
+				add r2, r0
+				st r1, r0
+			
+			# если в лунке значение 1, то нужно что-то делать
+			halt
+			fi
 		fi
+		
 		ldi r0, 0x1F
 		ldi r1, 0
 		st r0, r1

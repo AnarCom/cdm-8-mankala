@@ -25,11 +25,7 @@ INIT_MEMORY:
       #|||> Game stopped
       #||> Initializing memory
       #|> Set button register to 0
-      #> Ready
-
-		ldi r0, 0x0f
-		ldi r1, 0b00100000
-		st r0, r1  
+      #> Ready 
 		ldi r1, 13
 		ldi r2, 0
 		ldi r3, 4
@@ -74,10 +70,10 @@ INIT_MEMORY:
 		ldi r0, 0x0E
 		ldi r1, 1
 		st r0, r1
-		
-		ldi r0, 0x0f
-		ldi r1, 0b00000000
-		st r0, r1
+	
+		ldi r1, 0x0C
+		ldi r0, 0
+		st r1, r0
 	rts
 	# END INIT MEMORY
 # loads hole to skip to r3
@@ -168,7 +164,52 @@ CIRCLE_NUMBERS:
 			sub r0, r1
 		is z
 		jsr CHANGE_QUEUE_OF_PLAYER
+		else
+			move r0, r1
+			ld r1, r1
+			ldi r2, 1
+			if
+			sub r1, r2
+			is z
+				ldi r1, 0x1E
+				ld r1, r1
+				ldi r2, 2
+				if
+					sub r1, r2
+				is z
+					ldi r2, -8
+				else
+					ldi r2, 8
+				fi
+				
+				move r0, r1
+				add r2, r1
+				ldi r3, 0
+				st r0, r3
+				ld r1, r2
+				inc r2
+				st r1, r3
+				
+				ldi r1, 0x1E
+				ld r1, r1
+				ldi r0, 2
+				if
+					sub r0, r1
+				is z 
+					ldi r1, 0x0D
+				else
+					ldi r1, 0x06
+				fi
+				# r2 - количество шариков, которые нужно переложить 
+				ld r1, r0
+				add r2, r0
+				st r1, r0
+			
+			# если в лунке значение 1, то нужно что-то делать
+			halt
+			fi
 		fi
+		
 		ldi r0, 0x1F
 		ldi r1, 0
 		st r0, r1
@@ -180,7 +221,7 @@ CIRCLE_NUMBERS:
 	MAIN:
 	jsr INIT_MEMORY
 	ldi r0, 0x1f
-	ldi r1, 0x0B
+	ldi r1, 0x0A
 	st r0, r1
 	ldi r0, 0x1E
         ldi r1, 2
