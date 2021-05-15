@@ -63,6 +63,9 @@ LOAD_SKIPPING_HOLE:
 	fi
 	rts
 CIRCLE_NUMBERS:
+		ldi r0, 0x0F
+		ldi r1, 0b00000100
+		st r0, r1
 		ldi r0, 0x1F
  		ld r0, r1
 		#Ожидание числа на входе (по логике можно выпилить)
@@ -96,14 +99,13 @@ CIRCLE_NUMBERS:
 		inc r0
 		
 		jsr LOAD_SKIPPING_HOLE
-		#пропуск лунки противника
+		
 		if 
 			sub r0, r3
 		is z
 			inc r0
 		fi
 		
-		#циклическое замыкание лунок (если add лунки > max -> = min)
 		ldi r3, 0x0E
 		if
 			sub r0, r3
@@ -117,11 +119,28 @@ CIRCLE_NUMBERS:
 		dec r1
 		wend
 		# тут ДоЛжНа быть обработка того, что мы переложили в 0 и в финальную ячейку
+		ldi r1, 0x1E
+		ld r1, r1
+		ldi r2, 2
+		if
+			sub r2, r1
+		is z 
+		ldi r1, 0x0D
+		else
+			ldi r1, 0x06
+		fi
+		if
+			sub r0, r1
+		is z
+		jsr CHANGE_QUEUE_OF_PLAYER
+		fi
 		ldi r0, 0x1F
 		ldi r1, 0
 		st r0, r1
+		ldi r0, 0x0F
+		ldi r1, 0b00000000
+		st r0, r1
 	rts
-	
 	
 MAIN: 
 	pop r0
