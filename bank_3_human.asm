@@ -36,7 +36,7 @@ asect	0x00
 	br 0xF7
 	#перед попаданием в функцию в r0 должен быть адрес банки для перехода
 	#switch to 2 bank
-asect 0xF7
+	asect 0xF7
 	ldi r1, 0xff	
 	st r1, r0
 	br 0
