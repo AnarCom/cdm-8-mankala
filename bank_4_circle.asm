@@ -1,70 +1,11 @@
 asect 0x00
 br MAIN
 CHANGE_QUEUE_OF_PLAYER:
+	ldi r0, 0xFB
+	ldi r1, 1
+	st r0, r1
 	rts
-INIT_MEMORY:
-	#0b00000000
-      #^^^^^^^^
-      #||||||||
-      #|||||||> Error
-      #||||||> W\R to\from field
-      #|||||> Computing
-      #||||> Waiting user action
-      #|||> Game stopped
-      #||> Initializing memory
-      #|> Set button register to 0
-      #> Ready 
-		ldi r1, 13
-		ldi r2, 0
-		ldi r3, 4
-		while
-		tst r1
-		stays pl
-			st r2, r3
-			inc r2
-			dec r1
-		wend
-	
-		ldi r0, 0
-		ldi r1, 6
-		st r1, r0
-	
-		ldi r1, 13
-		st r1, r0
-	
-		ldi r0, 1
-		ldi r1, 0x10
-		ldi r2, 6
-	
-		while 
-		tst r2
-		stays pl
-		st r1, r0
-		dec r2
-		inc r0
-		inc r1
-	
-		wend 
-		inc r0
-		ldi r2, 6
-		while 
-		tst r2
-		stays pl
-		st r1, r0
-		dec r2
-		inc r0
-		inc r1
-		wend
-		ldi r0, 0x0E
-		ldi r1, 1
-		st r0, r1
-	
-		ldi r1, 0x0C
-		ldi r0, 0
-		st r1, r0
-	rts
-	# END INIT MEMORY
-# loads hole to skip to r3
+
 LOAD_SKIPPING_HOLE:
 	# 2 - AI
 	# 3 - People
@@ -140,39 +81,25 @@ CIRCLE_NUMBERS:
 		wend
 		# тут ДоЛжНа быть обработка того, что мы переложили в 0 и в свою ячейку
 		
-		push r0
-		
 		ldi r1, 0x1E
 		ld r1, r1
 		dec r1
 		dec r1
 		
-		ldi r2, 0x07
-		
-		if 
-			sub r0, r2
-		is pl
-			ldi r2, 1
+		if
+			tst r1
+		is z
+			ldi r2, 0x0D
 		else
-			ldi r2, 0
+			ldi r2, 0x06
 		fi
 		
 		if
-			tst r1
-		is nz
-			not r2
-		fi
-		
-		ldi r1, 0b00000001
-		and r1, r2
-		
-		if 
-			tst r2
-		is nz
+			sub r0, r2
+		is z
 			jsr CHANGE_QUEUE_OF_PLAYER
 		fi
 		
-		pop r0
 		ldi r0, 0x1F
 		ldi r1, 0
 		st r0, r1
@@ -180,17 +107,18 @@ CIRCLE_NUMBERS:
 		ldi r1, 0b00000000
 		st r0, r1
 rts
-	
-	MAIN:
-	jsr INIT_MEMORY
-	ldi r0, 0x1f
-	ldi r1, 0x06
-	st r0, r1
-	ldi r0, 0x1E
-    ldi r1, 3
-    st r0, r1
-	ldi r0, 0
-	ldi r1, 0
+
+
+
+MAIN:
 	jsr CIRCLE_NUMBERS
-	halt
+
+	ldi r0, 1
+	br CHANGE
+	#halt
+asect 0xF7
+	CHANGE:
+	ldi r1, 0xff	
+	st r1, r0
+	br 0
 end.

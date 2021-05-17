@@ -32,7 +32,7 @@ ld r1, r1
 
 ldi r0, 0x1F
 st r0, r1
-ldi r0, 1
+ldi r0, 4
 br CHANGE
 asect 0xF7
 	CHANGE:
