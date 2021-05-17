@@ -1,6 +1,7 @@
 asect 0x00
 START:
 #rand char in r1
+
 ldi r1, 0xFA
 ld r1, r1
 
