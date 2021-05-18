@@ -3,8 +3,9 @@ br MAIN
 #BEGIN OF DISPLAY DRAW
 	WRITE_TO_FIELD:
 	ldi r0, 0x0f
-		ldi r1, 0b00000010
-		st r0, r1  
+	ldi r1, 0b00000010
+	st r0, r1  
+	
 	ldi r0, 0x0D
 	while 
 	tst r0 
@@ -26,6 +27,10 @@ br MAIN
 	pop r0
 	dec r0
 	wend
+	
+	ldi r0, 0x0f
+	ldi r1, 0b00000000
+	st r0, r1
 	rts
 	
 	CHANGE_QUEUE_OF_PLAYER:
@@ -62,7 +67,18 @@ MAIN:
 	#Память только была инициализирвоана?
 	jsr WRITE_TO_FIELD
 	jsr CHANGE_QUEUE_OF_PLAYER
+	#кто-то выйграл?
+	ldi r0, 0xF8
+	ld r0, r0
 	
+	if
+		tst r0
+	is nz
+		ldi r0, 0x0f
+		ldi r1, 0b00010000
+		st r0, r1
+		halt
+	fi
 	#загрузка id банки перехода
 	ldi r0, 0x1e
 	ld r0, r0
