@@ -1,11 +1,11 @@
 asect	0x00
 	# WRITE YOUR CODE HERE
-	
+	START:
 	ldi r0, 0x0f
 	ldi r1, 0b00001000
 	st r0, r1
 	
-	START:
+	
 	
 	ldi r0, 0xF9
 	ld r0, r1
@@ -15,16 +15,23 @@ asect	0x00
 	ld r0, r1
 	wend
 	
+	
 	move r1, r2
-	ld r2
-	if
+	dec r2
+	ld r2, r2
+	if 
 		tst r2
 	is z
 		ldi r0, 0x0f
-		ldi r1, 0b01000000
+		ldi r1, 0b01000001
 		st r0, r1 
+		
+		ldi r0, 0x0f
+		ldi r1, 0b00000000
+		st r0, r1
 		br START
 	fi
+	
 	ldi r0, 0x1F
 	st r0, r1
 	
